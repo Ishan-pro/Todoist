@@ -1,0 +1,15 @@
+type Todo {
+	completed: Boolean!
+	text: String!
+	owner:User!
+}
+
+type User{
+	name: String! @unique
+	password: String!
+	todos: [Todo!]! @relationship(name:"owner")
+}
+
+type Query {
+	finduserbyname(name: String!): User!
+}
