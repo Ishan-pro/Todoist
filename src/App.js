@@ -1,16 +1,32 @@
-import React from 'react'
-import './App.css';
-import { ApolloProvider } from "@apollo/client";
-import { client } from "./client";
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+  const [todoList, setTodoList] = useState(" ");
+
+  const [todo, setTodo] = useState("");
+
+  const handleNewTodo = () => {
+    setTodoList((prev) => prev + '--sfsf--' + todo);
+    setTodo('')
+  };
+
   return (
-    <ApolloProvider client={client}>
-     <div style={{ padding: "5px" }}>
-       <h3>My Todo Items</h3>
-       <div>items to get loaded here</div>
-     </div>
-   </ApolloProvider>
+    <>
+      <h1>My items</h1>
+      <h2>Todos</h2>
+      {todoList.split("--sfsf--").map((todo) => (
+        <p>{todo}</p>
+      ))}
+      <input
+        placeholder="new Todo"
+        onChange={(e) => {
+          setTodo(e.target.value);
+        }}
+        value={todo}
+      ></input>
+      <button onClick={handleNewTodo}>Create Todo</button>
+    </>
   );
 }
 
